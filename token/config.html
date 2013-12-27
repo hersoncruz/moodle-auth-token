@@ -1,0 +1,77 @@
+<?php
+
+include($CFG->dirroot.'/auth/token/languages.php');
+
+// set to defaults if undefined (TOKEN)
+
+if (!isset ($config->tokenlogoimage)) {
+    $config->tokenlogoimage = 'token.jpg';
+}
+
+if (!isset ($config->tokenlogoinfo)) {
+    $config->tokenlogoinfo = 'Token login';
+}
+
+if (!isset ($config->salt)) {
+    $config->salt = '';
+}
+if (!isset ($config->referrers)) {
+    $config->referrers = '';
+}
+
+if (!isset ($config->tokenlogfile)) {
+    $config->tokenlogfile = 'moodle_token_log.txt';
+}
+
+
+?>
+<table cellspacing="0" cellpadding="5" border="0">
+<tr>
+    <td colspan="2">
+        <h4><?php print_string('auth_token_server_settings', 'auth_token') ?></h4>
+    </td>
+</tr>
+<tr valign="top">
+    <td class="right"><?php print_string("auth_token_logo_path", "auth_token"); ?>:</td>
+    <td>
+       <input name="tokenlogoimage" type="text" size="30" value="<?php echo $config->tokenlogoimage; ?>" />
+    </td>
+    <td><?php print_string("auth_token_logo_path_description", "auth_token"); ?></td>
+</tr>
+<tr valign="top">
+    <td class="right"><?php print_string("auth_token_logo_info", "auth_token"); ?>:</td>
+    <td>
+       <textarea name="tokenlogoinfo" type="text" size="30" rows="5" cols="30"><?php echo $config->tokenlogoinfo; ?></textarea>
+    </td>
+    <td><?php print_string("auth_token_logo_info_description", "auth_token"); ?></td>
+</tr>
+<tr valign="top" class="required">
+    <td align="right"><label for="salt"><?php print_string('auth_salt_label', 'auth_token') ?>: </label></td>
+    <td>
+        <input name="salt" id="salt" type="text" size="48" value="<?php echo $config->salt; ?>" />
+        <?php if (isset($err['salt'])) { echo $OUTPUT->error_text($err['salt']); } ?>
+    </td>
+    <td>
+        <?php print_string('auth_salt_desc', 'auth_token') ?>
+    </td>
+</tr>
+<tr valign="top" class="required">
+    <td align="right">
+        <label for="referrers"><?php print_string('auth_token_referrers_label', 'auth_token') ?>: </label>
+    </td>
+    <td>
+        <textarea name="referrers" id="referrers" type="text" cols="50" rows="8"><?php echo $config->referrers ?></textarea>
+        <?php if (isset($err['referrers'])) { echo $OUTPUT->error_text($err['referrers']); } ?>
+    </td>
+    <td>
+        <?php print_string('auth_token_referrers_desc', 'auth_token') ?>
+    </td>
+</tr>
+<tr valign="top">
+    <td class="right"><?php print_string("auth_token_logfile", "auth_token"); ?>:</td>
+    <td>
+       <input name="tokenlogfile" type="text" size="30" value="<?php echo $config->tokenlogfile; ?>" />
+    </td>
+    <td><?php print_string("auth_token_logfile_description", "auth_token"); ?></td>
+</tr>
+</table>
